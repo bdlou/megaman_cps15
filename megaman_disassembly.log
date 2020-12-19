@@ -73,12 +73,16 @@
 000A8E  lea     ($388,PC) ; ($e18), A2
 000A92  lea     ($6,PC) ; ($a9a), A5
 000A96  bra     $c5c
+
+; End of CPS1 RAM OK TEST
 000A9A  lea     $920000.l, A0
 000AA0  lea     (A0), A1
 000AA2  adda.l  #$fffe, A1
 000AA8  lea     ($376,PC) ; ($e20), A2
 000AAC  lea     ($6,PC) ; ($ab4), A6
 000AB0  bra     $c26
+; End of CPS1 RAM OK TEST
+
 000AB4  lea     ($374,PC) ; ($e2a), A2
 000AB8  lea     ($6,PC) ; ($ac0), A5
 000ABC  bra     $c5c
