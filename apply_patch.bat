@@ -1,4 +1,4 @@
-SET ROM_DIR=H:\ffight3p\gittest\mame0206\roms
+SET ROM_DIR=C:\Users\grego\Desktop\MAME\roms
 
 del build\megaman_hack.bin
 copy build\megaman.bin build\megaman_hack.bin
