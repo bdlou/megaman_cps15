@@ -28,6 +28,92 @@ qsound_fifo_tail_offset = -$5FE0
  
  org $18F0
 	dc.w	$10
+	
+; ==============================
+;
+; Region text
+;
+; ==============================
+
+ org $52EA	; Offset table for region text
+ 
+	dc.w	$E0, $E0, $E0, $E0, $E0, $E0		; Region and version
+	dc.w	$242, $242, $242, $242, $242, $242	; Warning
+	
+ org $53CA
+
+	dc.b	$0C
+	dc.b	$24
+	dc.b	$02
+	dc.b	"MEGA MAN THE POWER BATTLE /"
+	
+	dc.b	$12
+	dc.b	$30
+	dc.b	$02
+	dc.b	"2 0 1 2 1 8 /"
+	
+	dc.b	$11
+	dc.b	$3C
+	dc.b	$02
+	dc.b	"C P S  1 . 5"
+	
+	dc.w	$0
+
+ org $552C
+ 
+	dc.b	$14
+	dc.b	$10
+	dc.b	$02
+	dc.b	"WARNING/"
+	
+	dc.b	$03
+	dc.b	$20
+	dc.b	$02
+	dc.b	"You are not authorized to use this software/"
+	
+	dc.b	$03
+	dc.b	$28
+	dc.b	$02
+	dc.b	"at all./"
+	
+	dc.b	$03
+	dc.b	$34
+	dc.b	$02
+	dc.b	"We accept no responsibility for any/"
+	
+	dc.b	$03
+	dc.b	$3C
+	dc.b	$02
+	dc.b	"misfortunes which may befall you as a result/"
+	
+	dc.b	$03
+	dc.b	$44
+	dc.b	$02
+	dc.b	"of operating this game./"
+	
+	dc.b	$02
+	dc.b	$60
+	dc.b	$03
+	dc.b	"Another CPS 1.5 conversion brought to you by:/"
+	
+	dc.b	$05
+	dc.b	$6C
+	dc.b	$04
+	dc.b	"grego2d/"
+	
+	dc.b	$13
+	dc.b	$6C
+	dc.b	$04
+	dc.b	" Rotwang/"
+	
+	dc.b	$22
+	dc.b	$6C
+	dc.b	$04
+	dc.b	" bdlou"
+	
+	dc.w	$0
+	
+	
 
 ; Free space
  org $163C00
