@@ -245,6 +245,9 @@ Hijack_Upload_Audio_Commands_Exit:
 
 ;----------------
 Hijack_Add_Audio_Command_To_Fifo:
+	lsl.l   #$1, D1
+	move.w  tbl_sound_mappings(PC,D1.w), D1	
+
 	moveq   #$0, D2
 	moveq   #$0, D3
 
@@ -269,3 +272,6 @@ Add_Audio_Command_To_Fifo_Exit:
     moveq   #$0, D1
 	rts
 ;----------------
+
+tbl_sound_mappings:
+	incbin "sound_mappings.bin"
