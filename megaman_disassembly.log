@@ -5571,8 +5571,8 @@
 01BF30  jmp     $1bc22.l
 
 ; Upload audio commands
-01C6E6  move.w  (-$703e,A5), D0
-01C6EA  cmp.w   (-$7040,A5), D0
+01C6E6  move.w  (-$703e,A5), D0 ; Fifo head
+01C6EA  cmp.w   (-$7040,A5), D0 ; Fifo tail
 01C6EE  beq     $1c712
 
 01C6F0  lea     (-$7240,A5), A4
