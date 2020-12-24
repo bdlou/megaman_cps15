@@ -72,27 +72,27 @@ qsound_fifo_tail_offset = -$5FE0
 	dc.b	$03
 	dc.b	$20
 	dc.b	$02
-	dc.b	"You are not authorized to use this software/"
+	dc.b	"You are not in any way authorized to/"
 	
 	dc.b	$03
 	dc.b	$28
 	dc.b	$02
-	dc.b	"at all./"
+	dc.b	"play this game at all./"
 	
 	dc.b	$03
-	dc.b	$34
+	dc.b	$38
 	dc.b	$02
 	dc.b	"We accept no responsibility for any/"
 	
 	dc.b	$03
-	dc.b	$3C
+	dc.b	$40
 	dc.b	$02
 	dc.b	"misfortunes which may befall you as a result/"
 	
 	dc.b	$03
-	dc.b	$44
+	dc.b	$48
 	dc.b	$02
-	dc.b	"of operating this game./"
+	dc.b	"of being exposed to this game./"
 	
 	dc.b	$02
 	dc.b	$60
@@ -169,6 +169,8 @@ Clear_Qsound_Ram_Loop:
 	move.w  D0, (A0)+
 	cmpa.l  A1, A0
 	bls     Clear_Qsound_Ram_Loop
+	
+	jsr		draw_qsound_ramok
 
 	lea     $ab4, A6
 	jmp     (A6)
@@ -355,8 +357,43 @@ hijack_qsound_jingle:
 	
 hijack_qsound_jingle_return:
 	rts
+
+; ============================	
 	
+draw_qsound_ramok:
+	movea.l		#$9088D0, A1
+	movea.l		#qsound_text1, A0
+	moveq		#0, D0
+;	moveq		#0, D1
+	move.b		#6, D0
 	
+draw_qsound_ramok_loop:
+	move.b		(A0)+, D1
+;	andi.b		#$FF, D1
+	move.b		D1, ($1,A1)
+	lea			($80,A1), A1
+	dbf			D0, draw_qsound_ramok_loop
 	
+	lea			($100,A1), A1
+	movea.l		#qsound_text2, A0
+	moveq		#0, D0
+	move.b		#5, D0
+	
+draw_qsound_ramok_loop2:
+	move.b		(A0)+, D1
+;	andi.b		#$FF, D1
+	move.b		D1, ($1,A1)
+	lea			($80,A1), A1
+	dbf			D0, draw_qsound_ramok_loop2
+	
+	rts
+	
+qsound_text1:
+	dc.b	"Q SOUND"
+	dc.b	$0
+	
+qsound_text2:
+	dc.b	"RAM OK"
+	dc.b	$0
 	
 	
