@@ -1463,6 +1463,25 @@
 0029B8  bne     $29e8
 0029E8  andi    #$1, CCR
 0029EC  rts
+002E6A  moveq   #$1, D0
+002E6C  jsr     $10de.l
+002E72  move.w  #$74, D0
+002E76  moveq   #$3, D1
+002E78  jsr     $11c8.l
+002E7E  move.w  ($0,A5), D0
+002E82  move.w  ($8,PC,D0.w), D0
+002E86  jsr     ($4,PC,D0.w)
+002E8A  bra     $2e6a
+002EFA  move.w  ($4,A5), D0
+002EFE  movea.l ($4,PC,D0.w), A0
+002F02  jmp     (A0)
+0030F6  cmpi.w  #$30, ($4,A5)
+0030FC  beq     $3182
+003100  move.b  ($54,A5), D0
+003104  andi.b  #$30, D0
+003108  cmpi.b  #$30, D0
+00310C  bne     $3182
+003182  rts
 0031D4  st      ($83,A5)
 0031D8  movea.l (-$7b6c,A5), A6
 0031DC  move.w  ($10,A6), D0
@@ -2119,6 +2138,53 @@
 005156  lea     ($10,A1), A1
 00515A  dbra    D7, $5132
 00515E  rts
+007FF4  move.w  ($8,A5), D0
+007FF8  move.w  ($6,PC,D0.w), D1
+007FFC  jmp     ($2,PC,D1.w)
+008042  bsr     $8102
+008046  move.b  (-$7302,A5), D0
+00804A  move.b  D0, D1
+00804C  andi.w  #$f, D0
+008050  beq     $80a0
+0080A0  move.b  (-$7301,A5), D0
+0080A4  btst    #$4, D0
+0080A8  bne     $80d8
+0080AC  btst    #$5, D0
+0080B0  bne     $80d2
+0080B4  move.b  ($54,A5), D0
+0080B8  andi.w  #$30, D0
+0080BC  cmpi.w  #$30, D0
+0080C0  bne     $80cc
+0080CC  jmp     $30f6.l
+0080D2  jmp     $1c75e.l
+0080D8  moveq   #$0, D1
+0080DA  move.l  #$1000, D2
+0080E0  moveq   #$0, D3
+0080E2  move.w  (-$72f6,A5), D1
+0080E6  beq     $80ee
+0080E8  jmp     $1c720.l
+008102  move.b  ($50,A5), D1
+008106  move.b  D1, D2
+008108  move.b  D1, D3
+00810A  andi.w  #$c, D2
+00810E  bne     $8118
+008110  move.b  #$20, (-$7306,A5)
+008116  bra     $8120
+008120  moveq   #$0, D2
+008122  andi.w  #$3, D3
+008126  bne     $8130
+008128  move.b  #$20, (-$7305,A5)
+00812E  bra     $8138
+008138  moveq   #$0, D3
+00813A  andi.w  #$70, D1
+00813E  or.b    D2, D1
+008140  or.b    D3, D1
+008142  move.b  D1, (-$7302,A5)
+008146  move.b  ($51,A5), D1
+00814A  not.b   D1
+00814C  and.b   ($50,A5), D1
+008150  move.b  D1, (-$7301,A5)
+008154  rts
 009490  rts
 00C75C  move.b  ($460,A5), ($461,A5)
 00C762  move.b  ($860,A5), ($861,A5)

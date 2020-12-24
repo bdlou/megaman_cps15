@@ -19,7 +19,10 @@ qsound_fifo_tail_offset = -$5FE0
 
  org $01C714
 	jmp Hijack_Add_Audio_Command_To_Fifo
-   
+  
+ org $0080E8
+	jmp Hijack_Sound_Test_Add_Audio
+  
 ; ==============================
 ;
 ; QSound screen in attract mode
@@ -241,6 +244,16 @@ Hijack_Upload_Audio_Commands_Continue:
   
 Hijack_Upload_Audio_Commands_Exit:
   rts
+;----------------
+
+;----------------
+Hijack_Sound_Test_Add_Audio:
+	lsl.l   #$1, D1
+	move.w  tbl_sound_mappings(PC,D1.w), D1	
+
+	bsr Add_Audio_Command_To_Fifo_Continue
+
+	rts
 ;----------------
 
 ;----------------
