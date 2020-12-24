@@ -6689,10 +6689,10 @@
 01D81C  moveq   #$0, D3
 01D81E  bsr     $1d708
 
-01D822  movem.l (-$5fbc,A5), D0-D3/A4
+01D822  movem.l (-$5fbc,A5), D0-D3/A4	; 01C808 in cps1 megaman
 01D828  rts
 
-01D82A  movem.l D0-D3/A4, (-$5fbc,A5)
+01D82A  movem.l D0-D3/A4, (-$5fbc,A5)	; 01C810 in cps1 megaman
 01D830  rts
 
 01D890  tst.b   ($c5,A5)
@@ -7149,18 +7149,22 @@
 01F0BE  moveq   #$0, D2
 01F0C0  moveq   #$0, D3
 01F0C2  jmp     $1d890.l
+
+
 01F168  tst.b   ($c5,A5)
 01F16C  bne     $1f18e
 01F16E  bsr     $1d82a
-01F172  moveq   #$22, D1
+01F172  moveq   #$22, D1		; QSound jingle 1
 01F174  moveq   #$0, D2
 01F176  moveq   #$0, D3
 01F178  bsr     $1d6fc
-01F17C  moveq   #$23, D1
+01F17C  moveq   #$23, D1		; Qsound jingle 2
 01F17E  move.l  #$21020, D2
 01F184  moveq   #$70, D3
 01F186  bsr     $1d6fc
 01F18A  bra     $1d822
+
+
 01F1C0  bsr     $1f1c4
 01F1C2  bra     $1f1e8
 01F1C4  move.w  ($130,A5), D1
