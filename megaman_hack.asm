@@ -120,7 +120,7 @@ qsound_fifo_tail_offset = -$5FE0
 ; ================================
 ; Hijack QSound jingle cue
 
- org $194C
+ org $00194C
 	jmp		hijack_qsound_jingle
 
 ; ================================
@@ -338,20 +338,22 @@ tbl_stereo_calc_table:
 
 hijack_qsound_jingle:
 
-	jsr		$4FAC		; subroutine that this hijack overwrote
+	jsr		$004FAC		; subroutine that this hijack overwrote
 
 	tst.b   ($c5,A5)
 	bne     hijack_qsound_jingle_return
-	jsr     $1C810
+	
 	moveq   #$22, D1		; QSound jingle 1
 	moveq   #$0, D2
 	moveq   #$0, D3
 	jsr     Add_Audio_Command_To_Fifo_No_Stereo
+	
 	moveq   #$23, D1		; Qsound jingle 2
 	move.l  #$21020, D2
 	moveq   #$70, D3
 	jsr     Add_Audio_Command_To_Fifo_No_Stereo
-	jmp     $1C808
+
+	jmp     $0036aa
 	
 hijack_qsound_jingle_return:
 	rts
