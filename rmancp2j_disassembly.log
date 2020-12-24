@@ -6704,7 +6704,7 @@
 ; Stereo calculation
 01D89C  moveq   #$0, D2
 01D89E  move.w  ($10,A6), D2 ; Player x pos
-01D8A2  sub.w   ($210,A5), D2
+01D8A2  sub.w   ($210,A5), D2 ; Screen scroll
 01D8A6  bge     $1d8ac
 
 01D8A8  moveq   #$0, D2

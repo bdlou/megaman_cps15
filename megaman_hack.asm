@@ -251,6 +251,14 @@ Hijack_Add_Audio_Command_To_Fifo:
 	moveq   #$0, D2
 	moveq   #$0, D3
 
+	cmpi.w #$100, D1
+	blt	Add_Audio_Command_To_Fifo_No_Stereo
+
+	cmpi.w #$200, D1
+	bgt	Add_Audio_Command_To_Fifo_No_Stereo
+
+	bsr Stereo_Calculation
+
 Add_Audio_Command_To_Fifo_No_Stereo
 	tst.b   ($92,A5)
 	bne     Add_Audio_Command_To_Fifo_Continue
@@ -275,3 +283,31 @@ Add_Audio_Command_To_Fifo_Exit:
 
 tbl_sound_mappings:
 	incbin "sound_mappings.bin"
+
+;----------------
+; Stereo calculation
+Stereo_Calculation:
+	moveq   #$0, D2
+	move.w  ($10,A6), D2 ; Player x pos
+	sub.w   ($210,A5), D2 ; Screen scroll
+	bge     Stereo_Calculation_Check_Max
+
+	moveq   #$0, D2
+	bls     Stereo_Calculation_Cont
+
+Stereo_Calculation_Check_Max:
+	cmpi.w  #$17f, D2
+	bls     Stereo_Calculation_Cont
+
+	move.w  #$17f, D2
+
+Stereo_Calculation_Cont:
+	lsr.w   #2, D2
+	andi.w  #$7e, D2
+	add.w   tbl_stereo_calc_table(PC,D2.w), D2
+	andi.l  #$ff00, D0
+	rts
+;----------------
+
+tbl_stereo_calc_table:
+	incbin "megaman_stereo_table.bin"
