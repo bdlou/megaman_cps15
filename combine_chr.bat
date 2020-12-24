@@ -1,2 +1,2 @@
-java -jar RomMangler.jar combine sfzch_chr_split.cfg sfzch_chr.bin
+java -jar RomMangler.jar combine megaman_split_chr.cfg megaman_chr.bin
 pause
